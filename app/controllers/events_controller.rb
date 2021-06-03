@@ -17,8 +17,6 @@ class EventsController < ApplicationController
       url: params['event']['url']
     )
 
-    p event
-
     if event
       render json: {
         status: :created,
@@ -27,6 +25,20 @@ class EventsController < ApplicationController
     else
       render json: {
         status: 500
+      }
+    end
+  end
+
+  def destroy
+    event = Event.find(params['id'])
+    event.destroy
+    if event
+      render json: {
+        status: 500
+      }
+    else
+      render json: {
+        status: :deleted
       }
     end
   end
