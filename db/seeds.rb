@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Event.destroy_all
+User.destroy_all
 MenuItem.destroy_all
 
 [{date: DateTime.new(2020, 6, 8), title: "Singles Night", start_time: "8:00", end_time: "12:00", description: "We guarntee a 90% chance youre gonna get laid", public: true, url: "https://images.unsplash.com/flagged/photo-1574319523332-4cadaa531506?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGJhciUyMHBhcnR5fGVufDB8MHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"},

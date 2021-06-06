@@ -21,6 +21,7 @@ class SessionsController < ApplicationController
 
   def logout
     reset_session
+    session[:user_id] = nil
     render json: {
       status: 200,
       logged_out: true
@@ -28,10 +29,10 @@ class SessionsController < ApplicationController
   end
 
   def logged_in
-    if @current_user
+    if session[:user_id]
       render json: {
         logged_in: true,
-        user: @current_user
+        user: User.find(session[:user_id])
       }
     else
       render json: {
@@ -39,5 +40,4 @@ class SessionsController < ApplicationController
       }
     end
   end
-
 end
