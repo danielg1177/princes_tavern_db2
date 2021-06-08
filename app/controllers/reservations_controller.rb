@@ -3,7 +3,7 @@ require "pry"
 class ReservationsController < ApplicationController
 
   def create
-    reservation = Reservation.create!(
+    @reservation = Reservation.create!(
       user: User.find(params['reservation']['user']),
       date: Date.parse(params['reservation']['date']),
       time: params['reservation']['time'],
@@ -11,11 +11,12 @@ class ReservationsController < ApplicationController
       phone_number: params['reservation']['phone_number']
     )
 
-    if reservation
+    if @reservation
       render json: {
         status: :created,
-        reservation: reservation
+        reservation: @reservation
       }
+      NewReservationEmailMailer.notify(User.find(params['reservation']['user']), @reservation).deliver
     else
       render json: {
         status: 500
@@ -41,6 +42,7 @@ class ReservationsController < ApplicationController
         status: :updated,
         reservation: reservation
       }
+      NewReservationEmailMailer.update(reservation.user, reservation).deliver
     else
       render json: {
         status: 500
