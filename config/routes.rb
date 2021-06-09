@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :create, :destroy]
   resources :menu_items, only: [:index, :create, :destroy]
   delete :logout, to: 'sessions#logout'
+  patch :update, to: 'registrations#update'
+  post :forgotten, to: 'sessions#forgotten'
   get :logged_in, to: 'sessions#logged_in'
 end

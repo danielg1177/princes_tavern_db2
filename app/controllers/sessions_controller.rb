@@ -19,6 +19,10 @@ class SessionsController < ApplicationController
     end
   end
 
+  def forgotten
+    SessionsMailer.forgotten(params['user']['email'], params['user']['code']).deliver
+  end
+
   def logout
     reset_session
     session[:user_id] = nil
